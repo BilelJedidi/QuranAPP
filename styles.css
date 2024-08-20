@@ -1,3 +1,7 @@
+body {
+    overflow: hidden; /* This prevents scrolling */
+}
+
 @media (max-width: 768px) {
     #chapter-list ul li {
         font-size: 32px; /* Adjust font size for smaller screens */
