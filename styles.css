@@ -1,0 +1,138 @@
+@media (max-width: 768px) {
+    #chapter-list ul li {
+        font-size: 32px; /* Adjust font size for smaller screens */
+    }
+    #menu-button {
+        top: 10px; /* Adjust positioning for smaller screens */
+        right: 10px; /* Adjust positioning for smaller screens */
+    }
+}
+
+
+/* Define the custom font */
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('./fonts/arbfonts_Qurraan_sora.otf') format('opentype'); /* Correct format for OTF files */
+}
+
+/* PDF Viewer Canvas */
+#pdf-canvas {
+    width: 100%;
+    height: 100vh;
+}
+
+/* Control Buttons */
+#controls {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    direction: rtl; /* Right to Left for Arabic */
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Menu Button */
+#menu-button {
+    position: fixed;
+    top: 5px; /* Keep this value consistent */
+    right: 5px; /* Keep this value consistent */
+    background-color: rgba(0, 0, 0, 0.7); /* Black background with 70% opacity */
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1001; /* Ensure it's above other content */
+}
+
+
+/* Chapter List Styling */
+#chapter-list {
+    position: fixed; /* Fullscreen positioning */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    overflow-y: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+    display: none;
+    direction: rtl; /* Right to Left for Arabic */
+    text-align: right; /* Ensure text aligns to the right */
+}
+
+/* Adjust the list styling */
+#chapter-list {
+    position: fixed; /* Fullscreen positioning */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    overflow-y: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+    display: none;
+    direction: rtl; /* Right to Left for Arabic */
+}
+
+/* Adjust the list styling */
+#chapter-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#chapter-list ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    background: white;
+    color: black;
+    direction: rtl; /* Right to Left for Arabic */
+    font-family: 'MyCustomFont', sans-serif; /* Apply custom font */
+    font-size: 40px; /* Set desired font size for chapter names */
+}
+
+#chapter-list ul li span {
+    background-color: black;
+    color: white;
+    width: 40px; /* Fixed width for square shape */
+    height: 40px; /* Fixed height for square shape */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    margin-left: 10px; /* Adjusted for RTL */
+    white-space: nowrap; /* Ensure the number stays on one line */
+    font-family: sans-serif; /* Use default font for numbers */
+    font-size: 20px; /* Set desired font size for numbers */
+}
+
+#chapter-list ul li:hover {
+    background-color: white;
+    color: black;
+}
+
+#chapter-list ul li:hover span {
+    background-color: white;
+    color: black;
+}
