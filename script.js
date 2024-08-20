@@ -133,6 +133,11 @@ const loadPDF = async () => {
 
 // Render a single page
 const renderPage = async (num) => {
+    if (pageRendering) {
+        pageNumPending = num;
+        return;
+    }
+
     pageRendering = true;
     const page = await pdfDoc.getPage(num);
     const viewport = page.getViewport({ scale: 1 });
@@ -144,13 +149,19 @@ const renderPage = async (num) => {
     canvas.width = viewport.width * scale;
     canvas.height = viewport.height * scale;
     context.scale(scale, scale);
-    
+
     const renderContext = {
         canvasContext: context,
         viewport: viewport
     };
+
+    // Render the page
     await page.render(renderContext).promise;
+
+    // Indicate rendering is complete
     pageRendering = false;
+
+    // If there is a pending page to render, do it now
     if (pageNumPending !== null) {
         renderPage(pageNumPending);
         pageNumPending = null;
