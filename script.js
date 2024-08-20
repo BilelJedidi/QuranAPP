@@ -126,18 +126,22 @@ let pageNumPending = null;
 
 // Asynchronous function to fetch and display PDF pages
 const loadPDF = async () => {
+    console.log('Loading PDF...');
     const loadingTask = pdfjsLib.getDocument(url);
     pdfDoc = await loadingTask.promise;
+    console.log('PDF Loaded, Total Pages:', pdfDoc.numPages);
     renderPage(pageNum);
 };
 
 // Render a single page
 const renderPage = async (num) => {
     if (pageRendering) {
+        console.log('Page rendering in progress, setting pending page number:', num);
         pageNumPending = num;
         return;
     }
 
+    console.log('Rendering page:', num);
     pageRendering = true;
     const page = await pdfDoc.getPage(num);
     const viewport = page.getViewport({ scale: 1 });
@@ -160,9 +164,11 @@ const renderPage = async (num) => {
 
     // Indicate rendering is complete
     pageRendering = false;
+    console.log('Page rendered:', num);
 
     // If there is a pending page to render, do it now
     if (pageNumPending !== null) {
+        console.log('Rendering pending page:', pageNumPending);
         renderPage(pageNumPending);
         pageNumPending = null;
     }
@@ -173,11 +179,13 @@ const handleSwipe = (event) => {
     if (event.deltaX > 0) { // Swipe left
         if (pageNum < pdfDoc.numPages) {
             pageNum++;
+            console.log('Swipe left, going to page:', pageNum);
             renderPage(pageNum);
         }
     } else if (event.deltaX < 0) { // Swipe right
         if (pageNum > 1) {
             pageNum--;
+            console.log('Swipe right, going to page:', pageNum);
             renderPage(pageNum);
         }
     }
@@ -195,6 +203,7 @@ const chapterListUl = chapterList.querySelector('ul');
 
 menuButton.addEventListener('click', () => {
     chapterList.style.display = chapterList.style.display === 'none' ? 'block' : 'none';
+    console.log('Toggled chapter list');
 });
 
 // Populate chapter list
@@ -316,7 +325,6 @@ const chapters = [
     // Add the rest of the chapters here...
     { number: 114, name: 'الناس' }
 ];
-
 chapters.forEach(chapter => {
     const li = document.createElement('li');
     const span = document.createElement('span');
@@ -326,6 +334,7 @@ chapters.forEach(chapter => {
     li.addEventListener('click', () => {
         const page = chapterToPageMap[chapter.number];
         if (page) {
+            console.log('Navigating to chapter:', chapter.name, 'Page:', page);
             pageNum = page;
             renderPage(pageNum);
             chapterList.style.display = 'none'; // Hide the chapter list after selection
